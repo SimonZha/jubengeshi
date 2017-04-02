@@ -1,0 +1,105 @@
+<html>
+<head>
+ 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">   
+	<script>
+		function myFunction(){
+			var x="";
+			var s="";
+			//var j=1; //场景编号
+			x=document.getElementById("wenben").value;
+			x=x.replace(/\n/g,"*"); //将换行符换成字符*
+			x=x.split("*"); //通过识别*将文本变成数组
+			
+			for (var i=0;i<x.length;i++){  //遍历数组，为每个数组加上<p>标签
+				if(x[i].indexOf("## ")!=-1){
+					x[i]=x[i].replace(/##/g,""); //将##去掉
+					s=s+"<p class='scene'>"+x[i]+"</p>"; //s=s+"<p class='scene'>"+j+"."+x[i]+"</p>";
+					//j=j+1;
+				}else{
+
+					if(x[i-1]==""&x[i+1]==""){
+						s=s+"<p class='action'>"+x[i]+"</p>";
+					}
+					if(x[i-1]==""&x[i+1]!=""){
+						s=s+"<p class='role'>"+x[i]+"</p>";
+					}
+					if(x[i-1]!=""&x[i]!=""){
+						s=s+"<p class='dialogue'>"+x[i]+"</p>";
+					}
+					
+				}
+			}
+			
+			document.getElementById("juben").innerHTML=s; //输出剧本
+		}
+	</script>
+
+	<style>
+
+	#edit {
+		width:575px; 
+		padding: 0; 
+		margin-top:20px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	textarea{
+		height:150px;
+		width:575px;
+	}
+	#excute {
+		width:115px;
+		margin-left:460px;
+		margin-top:20px;
+	}
+	#juben {
+		width:575px;
+		font-family: SimSun,FangSong,SimHei,Microsoft YaHei,Microsoft JhengHei;
+		font-size:14px;
+		margin:0;
+		padding:0;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.scene {
+		margin-top:20px;
+		padding:0;
+		font-weight:bold;
+		background-color: #CCCCCC;
+	}
+	.action {
+		padding:0;
+		margin-top:8px;
+		margin-bottom:2px;
+		margin-left:5px;
+		margin-right:5px;
+	}
+	.role {
+		font-weight:bold;
+		padding:0;
+		margin-top:15px;
+		margin-bottom:0;
+		margin-left:150px;
+		margin-right:150px;
+	}
+	.dialogue {
+		padding:0;
+		margin-top:0;
+		margin-bottom:5px;
+		margin-left:100px;
+		margin-right:200px;
+	}
+	</style>
+</head>
+
+<body>
+	<div id="edit">
+	<p>将剧本文本复制到以下输入框<a href="http://www.jokeright.com/?q=node/1" target=_blank>（使用说明）</a></p>
+	<textarea id="wenben"></textarea>
+	<br/>
+	<button onclick="myFunction()" id="excute">整理格式</button>
+	</div>
+	<div id="juben"></div>
+<body>
+</html>
