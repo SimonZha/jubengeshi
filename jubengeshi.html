@@ -1,6 +1,5 @@
-<html>
+<!--本程序是自由程序，受GPL协议保护，您可以修改代码，但是必须保证遵守GPL协议，免费提供修改后的源代码-->
 <head>
-	<!--本程序是自由程序，受GPL协议保护，您可以修改代码，但是必须保证遵守GPL协议，免费提供修改后的源代码-->
  	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">   
 	<script>
@@ -9,8 +8,8 @@
 			var s="";
 			//var j=1; //场景编号
 			x=document.getElementById("wenben").value;
-			x=x.replace(/\n/g,"*"); //将换行符换成字符*
-			x=x.split("*"); //通过识别*将文本变成数组
+			x=x.replace(/\n/g,"*!"); //将换行符换成字符*!
+			x=x.split("*!"); //通过识别*!将文本变成数组
 			
 			for (var i=0;i<x.length;i++){  //遍历数组，为每个数组加上<p>标签
 				if(x[i].indexOf("## ")!=-1){
@@ -21,6 +20,7 @@
 
 					if(x[i-1]==""&x[i+1]==""){
 						s=s+"<p class='action'>"+x[i]+"</p>";
+						s=s.replace(/(\*\*|__)(?=\S)([^\r]*?\S[*_]*)\1/g,"<strong>$2</strong>"); //**加粗** 2017-4-19更新
 					}
 					if(x[i-1]==""&x[i+1]!=""){
 						s=s+"<p class='role'>"+x[i]+"</p>";
@@ -96,7 +96,7 @@
 
 <body>
 	<div id="edit">
-	<p style="font-style: italic">声明：本程序是自由程序，受GPL协议保护，您可以修改代码，但是必须保证遵守GPL协议，免费提供修改后的源代码<a href="https://github.com/SimonZha/jubengeshi" target=_blank>  【源代码】</a></p>
+        <p style="font-style: italic">声明：本程序是自由程序，受GPL协议保护，您可以修改代码，但是必须保证遵守GPL协议，免费提供修改后的源代码<a href="https://github.com/SimonZha/jubengeshi" target=_blank>  【源代码】</a></p>
 	<p>将剧本文本复制到以下输入框<a href="http://www.jokeright.com/?q=node/1" target=_blank>（使用说明）</a></p>
 	<textarea id="wenben"></textarea>
 	<br/>
@@ -104,4 +104,3 @@
 	</div>
 	<div id="juben"></div>
 <body>
-</html>
