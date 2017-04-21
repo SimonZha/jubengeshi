@@ -8,35 +8,36 @@
 			var s="";
 			//var j=1; //场景编号
 			x=document.getElementById("wenben").value;
-			x=x.replace(/\n/g,"*!"); //将换行符换成字符*!
-			x=x.split("*!"); //通过识别*!将文本变成数组
+			x=x.split(/\n/g); //将文本按换行分割成数组
 			
-			for (var i=0;i<x.length;i++){  //遍历数组，为每个数组加上<p>标签
-				if(x[i].indexOf("## ")!=-1){
-					x[i]=x[i].replace(/##/g,""); //将##去掉
-					s=s+"<p class='scene'>"+x[i]+"</p>"; //s=s+"<p class='scene'>"+j+"."+x[i]+"</p>";
-					//j=j+1;
+			for (var i=0;i<x.length;i++){  
+				if(/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm.test(x[i])){
+					//# 幕 ，## 场景，## 场景副标题
+					x[i] = x[i].replace(/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm,function(wholeMatch,m1,m2) {
+						var h_level = m1.length; 
+						return "<h" + h_level + " class='scene'>" + m2 + "</h" + h_level + ">";
+					});
+					s=s+x[i]; 
 				}else{
 
 					if(x[i-1]==""&x[i+1]==""){
+						//动作段落
 						s=s+"<p class='action'>"+x[i]+"</p>";
-						s=s.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<strong>$2</strong>"); //**加粗** 2017-4-20更新
-						s=s.replace(/(\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<i>$2</i>"); //**斜体** 2017-4-20更新
-						s=s.replace(/(\_)(?=\S)([^\r]*?\S[_]*)\1/g,"<u>$2</u>"); //**下划线** 2017-4-20更新
 					}
 					if(x[i-1]==""&x[i+1]!=""){
+						//角色段落
 						s=s+"<p class='role'>"+x[i]+"</p>";
 					}
 					if(x[i-1]!=""&x[i]!=""){
+						//对白段落
 						s=s+"<p class='dialogue'>"+x[i]+"</p>";
-						s=s.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<strong>$2</strong>"); //**加粗** 2017-4-20更新
-						s=s.replace(/(\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<i>$2</i>"); //**斜体** 2017-4-20更新
-						s=s.replace(/(\_)(?=\S)([^\r]*?\S[_]*)\1/g,"<u>$2</u>"); //**下划线** 2017-4-20更新
 					}
 					
 				}
 			}
-			
+			s=s.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<strong>$2</strong>"); //**加粗** 2017-4-20更新
+			s=s.replace(/(\*)(?=\S)([^\r]*?\S[*]*)\1/g,"<i>$2</i>"); //**斜体** 2017-4-20更新
+			s=s.replace(/(\_)(?=\S)([^\r]*?\S[_]*)\1/g,"<u>$2</u>"); //**下划线** 2017-4-20更新
 			document.getElementById("juben").innerHTML=s; //输出剧本
 		}
 	</script>
@@ -68,11 +69,25 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
-	.scene {
+	#juben h1  {
+		font-size:16px;
+		margin-top:20px;
+		padding:0;
+		font-weight:bold;
+		text-align:center;
+	}
+	#juben h2  {
+		font-size:14px;
 		margin-top:20px;
 		padding:0;
 		font-weight:bold;
 		background-color: #CCCCCC;
+	}
+	#juben h3  {
+		font-size:14px;
+		margin-top:20px;
+		padding:0;
+		font-weight:bold;
 	}
 	.action {
 		padding:0;
