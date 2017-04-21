@@ -18,7 +18,7 @@
 						return "<h" + h_level + " class='scene'>" + m2 + "</h" + h_level + ">";
 					});
 					s=s+x[i]; 
-				}else{
+				}else if(x[i]!=""){
 
 					if(x[i-1]==""&x[i+1]==""){
 						//动作段落
@@ -28,7 +28,7 @@
 						//角色段落
 						s=s+"<p class='role'>"+x[i]+"</p>";
 					}
-					if(x[i-1]!=""&x[i]!=""){
+					if(x[i-1]!=""){
 						//对白段落
 						s=s+"<p class='dialogue'>"+x[i]+"</p>";
 					}
