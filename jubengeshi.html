@@ -12,7 +12,7 @@
 			
 			for (var i=0;i<x.length;i++){  
 				if(/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm.test(x[i])){
-					//# 幕 ，## 场景，## 场景副标题
+					//# 幕 ，## 场景，### 场景副标题
 					x[i] = x[i].replace(/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm,function(wholeMatch,m1,m2) {
 						var h_level = m1.length; 
 						return "<h" + h_level + " class='scene'>" + m2 + "</h" + h_level + ">";
@@ -64,49 +64,49 @@
 	#juben {
 		width:575px;
 		font-family: SimSun,FangSong,SimHei,Microsoft YaHei,Microsoft JhengHei;
-		font-size:14px;
+		font-size:16px;
 		margin:0;
-		padding:0;
+		padding: 0;
 		margin-left:auto;
 		margin-right:auto;
+                line-height:17px;
 	}
 	#juben h1  {
-		font-size:14px;
-		margin-top:20px;
-		padding:0;
+		font-size:16px;
+		margin-top:32px;
+		margin-bottom:0px;
 		text-align:center;
 		text-decoration:underline;
 	}
 	#juben h2  {
-		font-size:14px;
-		margin-top:2em;
-		padding:0;
-		background-color:#CCCCCC;
+		font-size:16px;
+		margin-top:32px;
+		margin-bottom:0px;
 	}
 	#juben h3  {
-		font-size:14px;
-		margin-top:1em;
-		padding:0;
+		font-size:16px;
+		margin-top:16px;
+		margin-bottom:0px;
 	}
 	.action {
 		padding:0;
-		margin-top:8px;
-		margin-bottom:2px;
+		margin-top:16px;
+		margin-bottom:0px;
 	}
 	.role {
 		font-weight:bold;
 		padding:0;
-		margin-top:15px;
-		margin-bottom:0;
-		margin-left:180px;
-		margin-right:150px;
+		margin-top:16px;
+		margin-bottom:0px;
+		margin-left:6cm;
+		margin-right:3cm;
 	}
 	.dialogue {
 		padding:0;
 		margin-top:0;
-		margin-bottom:5px;
-		margin-left:100px;
-		margin-right:170px;
+		margin-bottom:0;
+		margin-left:4cm;
+		margin-right:4cm;
 	}
 	</style>
 </head>
